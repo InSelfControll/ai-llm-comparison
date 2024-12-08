@@ -7,6 +7,7 @@ import ModelTableForCalculator from './ModelTableforCalculator';
 import ModelTableForComparison from './ModelTableForComparison';
 import { AIModelMode } from '../types';
 import { Button } from "@/components/ui/button"
+import { ModeSelector } from './ModeSelector';
 
 interface ModelComparisonProps {
   showPricingCalculator: boolean;
