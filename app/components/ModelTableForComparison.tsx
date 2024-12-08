@@ -99,6 +99,56 @@ const ModelTableForComparison: React.FC<ModelTableForComparisonProps> = ({
     setSortConfig({ key, direction });
   };
 
+  const columns = [
+    {
+      header: "Model",
+      accessorKey: "name",
+    },
+    {
+      header: "Provider",
+      accessorKey: "provider",
+      cell: ({ row }) => (
+        <ProviderCell 
+          provider={row.original.provider} 
+          logo={row.original.logo} 
+        />
+      ),
+    },
+    {
+      header: "Input Length ↕",
+      accessorKey: "sample_spec.max_input_tokens",
+    },
+    {
+      header: "Output Length ↕",
+      accessorKey: "sample_spec.max_output_tokens",
+    },
+    {
+      header: "Input Price (per 1M tokens) ↕",
+      accessorKey: "sample_spec.input_cost_per_token",
+      cell: ({ row }) => `$${(row.original.sample_spec.input_cost_per_token * 1000000).toFixed(2)}`,
+    },
+    {
+      header: "Output Price (per 1M tokens) ↕",
+      accessorKey: "sample_spec.output_cost_per_token",
+      cell: ({ row }) => `$${(row.original.sample_spec.output_cost_per_token * 1000000).toFixed(2)}`,
+    },
+    {
+      header: "Supports Vision ↕",
+      accessorKey: "sample_spec.supports_vision",
+      cell: ({ row }) => row.original.sample_spec.supports_vision ? "✓" : "✕",
+    },
+    {
+      header: "Supports Function Calling",
+      accessorKey: "sample_spec.supports_function_calling",
+      cell: ({ row }) => row.original.sample_spec.supports_function_calling ? "✓" : "✕",
+    },
+    {
+      header: "Supports Parallel Function Calling",
+      accessorKey: "sample_spec.supports_parallel_function_calling",
+      cell: ({ row }) => row.original.sample_spec.supports_parallel_function_calling ? "✓" : "✕",
+    }
+  ];
+
   return (
     <div className="w-full">
       <div className="overflow-x-auto rounded-lg border border-border">
