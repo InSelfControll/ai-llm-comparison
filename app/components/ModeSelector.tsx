@@ -6,12 +6,12 @@ interface ModeSelectorProps {
 }
 
 const modes = [
-  'Chat',
-  'Embedding',
-  'Image generation',
-  'Completion',
-  'Audio transcription',
-  'TTS (Text To Speech)'
+  'chat',
+  'embedding',
+  'image_generation',
+  'completion',
+  'audio_transcription',
+  'audio_speech'
 ];
 
 export function ModeSelector({ selectedMode, onModeSelect }: ModeSelectorProps) {
