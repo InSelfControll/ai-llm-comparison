@@ -64,6 +64,14 @@
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
   }
+
+  .provider-cell {
+    @apply bg-muted/30 dark:bg-muted/10;
+  }
+
+  .table-header {
+    @apply bg-muted/50 dark:bg-muted/20;
+  }
 }
 
 @layer base {
@@ -79,4 +87,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@layer components {
+  .mode-button {
+    @apply px-4 py-2 rounded-lg text-sm font-medium transition-colors;
+  }
+  
+  .mode-button-selected {
+    @apply bg-black text-white dark:bg-white dark:text-black;
+  }
+  
+  .mode-button-unselected {
+    @apply bg-gray-100 hover:bg-gray-200 text-gray-900 
+    dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100;
+  }
 }

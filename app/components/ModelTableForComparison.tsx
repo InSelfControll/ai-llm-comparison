@@ -24,6 +24,17 @@ interface ModelTableForComparisonProps {
   searchTerm: string;
 }
 
+const ProviderCell = ({ provider, logo }) => (
+  <div className="flex items-center space-x-2 px-3 py-2 bg-muted/30 rounded-md">
+    <img
+      src={logo}
+      alt={`${provider} logo`}
+      className="h-5 w-5 object-contain"
+    />
+    <span>{provider}</span>
+  </div>
+);
+
 const ModelTableForComparison: React.FC<ModelTableForComparisonProps> = ({
   selectedMode,
   setSelectedMode,
@@ -170,14 +181,7 @@ const ModelTableForComparison: React.FC<ModelTableForComparisonProps> = ({
                 </TableCell>
                 <TableCell className="w-24 overflow-hidden">
                   <div className="flex items-center space-x-2 flex-wrap">
-                    <img
-                      src={model.logo}
-                      alt={`${model.provider} logo`}
-                      className="w-6 h-6 flex-shrink-0"
-                    />
-                    <span className="whitespace-normal break-words">
-                      {getDisplayName(model.provider)}
-                    </span>
+                    <ProviderCell provider={model.provider} logo={model.logo} />
                   </div>
                 </TableCell>
                 <TableCell className="w-20 text-center">

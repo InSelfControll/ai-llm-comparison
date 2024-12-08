@@ -6,6 +6,7 @@ import VersusComparison from './VersusComparison';
 import ModelTableForCalculator from './ModelTableforCalculator';
 import ModelTableForComparison from './ModelTableForComparison';
 import { AIModelMode } from '../types';
+import { Button } from "@/components/ui/button"
 
 interface ModelComparisonProps {
   showPricingCalculator: boolean;
@@ -13,6 +14,22 @@ interface ModelComparisonProps {
   showVersusComparison: boolean;
   setShowVersusComparison: (show: boolean) => void;
 }
+
+const ModeButton = ({ mode, isSelected, onClick }) => (
+  <button
+    onClick={onClick}
+    className={`
+      px-4 py-2 rounded-lg text-sm font-medium transition-colors
+      ${isSelected 
+        ? 'bg-primary text-primary-foreground'
+        : 'bg-secondary/50 hover:bg-secondary text-foreground'
+      }
+      ${mode === 'Chat' ? 'bg-black text-white' : ''}
+    `}
+  >
+    {mode === 'audio_speech' ? 'TTS (Text To Speech)' : mode}
+  </button>
+);
 
 export default function ModelComparison({
   showPricingCalculator,
@@ -91,6 +108,11 @@ export default function ModelComparison({
           )
         )}
       </div>
+
+      <ModeSelector 
+        selectedMode={selectedMode}
+        onModeSelect={(mode) => setSelectedMode(mode as AIModelMode)}
+      />
     </>
   );
 }
