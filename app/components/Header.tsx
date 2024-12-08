@@ -1,5 +1,6 @@
 import { Github, BarChart3 } from 'lucide-react'
 import { Button } from "@/components/ui/button"
+import { ThemeToggle } from './ThemeToggle'
 
 const InferenceLogo = () => (
   <svg
@@ -23,19 +24,19 @@ export default function Header() {
         <span className="text-2xl font-bold">countless.dev</span>
       </div>
       <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-        <Button variant="outline" size="sm" asChild className="border-black text-black hover:bg-gray-100">
+        <ThemeToggle />
+        <Button variant="outline" size="sm" asChild className="border-black dark:border-white text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800">
           <a href="https://inference.net/?utm_source=countless" target="_blank" rel="noopener noreferrer">
             <InferenceLogo />
             inference.net
           </a>
         </Button>
-        <Button variant="outline" size="sm" asChild className="border-black text-black hover:bg-gray-100">
+        <Button variant="outline" size="sm" asChild className="border-black dark:border-white text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800">
           <a href="https://github.com/Ahmet-Dedeler/ai-llm-comparison" target="_blank" rel="noopener noreferrer">
             <Github className="mr-2 h-4 w-4" />
             GitHub
           </a>
         </Button>
-        {/* ... (other buttons) ... */}
       </div>
     </header>
   )

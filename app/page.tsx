@@ -11,8 +11,8 @@ export default function Home() {
   const [showVersusComparison, setShowVersusComparison] = useState<boolean>(false)
 
   return (
-    <div className="min-h-screen bg-white text-black">
-      <div className="container mx-auto px-4 py-8">
+   <div className="min-h-screen bg-background text-foreground">
+    <div className="container mx-auto px-4 py-8">
         <Header />
         <div className="text-center mb-16">
           {/* Tweet Link */}
