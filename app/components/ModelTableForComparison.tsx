@@ -186,10 +186,10 @@ const ModelTableForComparison: React.FC<ModelTableForComparisonProps> = ({
                   {model.name}
                 </TableCell>
                 <TableCell className="text-right">
-                  ${Number(model.sample_spec.input_cost_per_token).toFixed(2)}
+                  ${Number(model.sample_spec.input_cost_per_token).toFixed(6)}
                 </TableCell>
                 <TableCell className="text-right">
-                  ${Number(model.sample_spec.output_cost_per_token).toFixed(2)}
+                  ${Number(model.sample_spec.output_cost_per_token).toFixed(6)}
                 </TableCell>
                 <TableCell className="text-right">
                   {model.sample_spec.max_tokens?.toLocaleString() || 'N/A'}
