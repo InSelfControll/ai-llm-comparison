@@ -60,7 +60,17 @@ export default function ModelComparison({
       </div>
 
       {showPricingCalculator && (
-        <PricingCalculator />
+        <PricingCalculator inputAmount={0} setInputAmount={function (amount: number): void {
+          throw new Error('Function not implemented.');
+        } } outputAmount={0} setOutputAmount={function (amount: number): void {
+          throw new Error('Function not implemented.');
+        } } apiCalls={0} setApiCalls={function (calls: number): void {
+          throw new Error('Function not implemented.');
+        } } inputType={''} setInputType={function (type: string): void {
+          throw new Error('Function not implemented.');
+        } } outputType={''} setOutputType={function (type: string): void {
+          throw new Error('Function not implemented.');
+        } } />
       )}
       
       {showVersusComparison && (
@@ -75,8 +85,7 @@ export default function ModelComparison({
         <ModelTableForCalculator
           selectedMode={selectedMode as AIModelMode}
           setSelectedMode={setSelectedMode}
-          searchTerm={searchTerm}
-        />
+          searchTerm={searchTerm} inputAmount={0} outputAmount={0} apiCalls={0} inputType={''} outputType={''}        />
       ) : (
         <ModelTableForComparison
           selectedMode={selectedMode as AIModelMode}
