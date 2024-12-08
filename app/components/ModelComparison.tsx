@@ -37,82 +37,53 @@ export default function ModelComparison({
   showVersusComparison,
   setShowVersusComparison
 }: ModelComparisonProps) {
-  const [selectedMode, setSelectedMode] = useState<AIModelMode>('chat');
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [inputType, setInputType] = useState<string>('tokens');
-  const [outputType, setOutputType] = useState<string>('tokens');
-  const [inputAmount, setInputAmount] = useState<number>(200);
-  const [outputAmount, setOutputAmount] = useState<number>(1000);
-  const [apiCalls, setApiCalls] = useState<number>(100);
+  const [selectedMode, setSelectedMode] = useState<string>('chat');
+  const [searchTerm, setSearchTerm] = useState('');
 
   return (
-    <>
-      <div className="text-center mb-16">
-        {/* ... (Hero section content) ... */}
+    <div className="space-y-6">
+      <div className="sticky top-0 z-10 bg-background pt-4 pb-2 border-b">
+        <ModeSelector
+          selectedMode={selectedMode}
+          onModeSelect={setSelectedMode}
+        />
       </div>
 
-      <div className="mb-8">
-        <div className="relative">
-          <Input
-            type="text"
-            placeholder="Search models..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-4 py-2 border-2 border-gray-300 rounded-full w-full"
-          />
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-        </div>
+      <div className="relative">
+        <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+        <Input
+          placeholder="Search models..."
+          className="pl-8"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
 
-      {/* Add a responsive container */}
-      <div className="overflow-x-auto">
-        {showPricingCalculator && (
-          <PricingCalculator
-            inputAmount={inputAmount}
-            setInputAmount={setInputAmount}
-            outputAmount={outputAmount}
-            setOutputAmount={setOutputAmount}
-            apiCalls={apiCalls}
-            setApiCalls={setApiCalls}
-            inputType={inputType}
-            setInputType={setInputType}
-            outputType={outputType}
-            setOutputType={setOutputType}
-          />
-        )}
-
-        {showVersusComparison ? (
-          <VersusComparison
-            selectedMode={selectedMode}
-            setSelectedMode={setSelectedMode}
-            searchTerm={searchTerm}
-          />
-        ) : (
-          showPricingCalculator ? (
-            <ModelTableForCalculator
-              selectedMode={selectedMode}
-              setSelectedMode={setSelectedMode}
-              searchTerm={searchTerm}
-              inputAmount={inputAmount}
-              outputAmount={outputAmount}
-              apiCalls={apiCalls}
-              inputType={inputType}
-              outputType={outputType}
-            />
-          ) : (
-            <ModelTableForComparison
-              selectedMode={selectedMode}
-              setSelectedMode={setSelectedMode}
-              searchTerm={searchTerm}
-            />
-          )
-        )}
-      </div>
-
-      <ModeSelector 
-        selectedMode={selectedMode}
-        onModeSelect={(mode) => setSelectedMode(mode as AIModelMode)}
-      />
-    </>
+      {showPricingCalculator && (
+        <PricingCalculator />
+      )}
+      
+      {showVersusComparison && (
+        <VersusComparison
+          selectedMode={selectedMode as AIModelMode}
+          setSelectedMode={setSelectedMode}
+          searchTerm={searchTerm}
+        />
+      )}
+      
+      {showPricingCalculator ? (
+        <ModelTableForCalculator
+          selectedMode={selectedMode as AIModelMode}
+          setSelectedMode={setSelectedMode}
+          searchTerm={searchTerm}
+        />
+      ) : (
+        <ModelTableForComparison
+          selectedMode={selectedMode as AIModelMode}
+          setSelectedMode={setSelectedMode}
+          searchTerm={searchTerm}
+        />
+      )}
+    </div>
   );
 }
