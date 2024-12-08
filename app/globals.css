@@ -103,3 +103,15 @@
     dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100;
   }
 }
+[data-theme='dark'] .tab {
+  color: #ffffff;
+}
+
+[data-theme='dark'] .tab.selected {
+  background-color: #333;
+  color: #ffffff;
+}
+
+[data-theme='dark'] .tab:hover:not(.selected) {
+  background-color: #2a2a2a;
+}
