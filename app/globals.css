@@ -66,7 +66,7 @@
   }
 
   .provider-cell {
-    @apply bg-muted/30 dark:bg-muted/10;
+    @apply bg-muted/30 dark:bg-muted/10 rounded-md p-2;
   }
 
   .table-header {
@@ -95,12 +95,11 @@
   }
   
   .mode-button-selected {
-    @apply bg-black text-white dark:bg-white dark:text-black;
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
   }
   
   .mode-button-unselected {
-    @apply bg-gray-100 hover:bg-gray-200 text-gray-900 
-    dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100;
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
   }
 }
 [data-theme='dark'] .tab {

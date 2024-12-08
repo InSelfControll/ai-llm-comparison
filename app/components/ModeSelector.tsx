@@ -25,13 +25,9 @@ export function ModeSelector({ selectedMode, onModeSelect }: ModeSelectorProps) 
           <button
             key={mode}
             onClick={() => onModeSelect(modeValue)}
-            className={`
-              px-4 py-2 rounded-lg text-sm font-medium transition-colors
-              ${isSelected 
-                ? 'bg-black text-white dark:bg-white dark:text-black'
-                : 'bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100'
-              }
-            `}
+            className={`mode-button ${
+              isSelected ? 'mode-button-selected' : 'mode-button-unselected'
+            }`}
           >
             {mode}
           </button>

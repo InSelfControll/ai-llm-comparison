@@ -25,13 +25,15 @@ interface ModelTableForComparisonProps {
 }
 
 const ProviderCell = ({ provider, logo }) => (
-  <div className="flex items-center gap-2">
-    <img
-      src={logo}
-      alt={`${provider} logo`}
-      className="h-5 w-5 object-contain"
-    />
-    <span className="text-sm font-medium">{provider}</span>
+  <div className="provider-cell">
+    <div className="flex items-center gap-2">
+      <img
+        src={logo}
+        alt={`${provider} logo`}
+        className="h-5 w-5 object-contain"
+      />
+      <span className="text-sm font-medium">{provider}</span>
+    </div>
   </div>
 );
 

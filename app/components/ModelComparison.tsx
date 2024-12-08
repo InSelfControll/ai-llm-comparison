@@ -19,14 +19,9 @@ interface ModelComparisonProps {
 const ModeButton = ({ mode, isSelected, onClick }) => (
   <button
     onClick={onClick}
-    className={`
-      px-4 py-2 rounded-lg text-sm font-medium transition-colors
-      ${isSelected 
-        ? 'bg-primary text-primary-foreground'
-        : 'bg-secondary/50 hover:bg-secondary text-foreground'
-      }
-      ${mode === 'Chat' ? 'bg-black text-white' : ''}
-    `}
+    className={`mode-button ${
+      isSelected ? 'mode-button-selected' : 'mode-button-unselected'
+    }`}
   >
     {mode === 'audio_speech' ? 'TTS (Text To Speech)' : mode}
   </button>
