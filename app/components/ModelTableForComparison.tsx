@@ -100,117 +100,43 @@ const ModelTableForComparison: React.FC<ModelTableForComparisonProps> = ({
   };
 
   return (
-    <div className="mb-8">
-      {/* Mode Selection Buttons */}
-      <div className="flex flex-wrap justify-start space-x-2 mb-6">
-        {Object.keys(aiModels).map((mode) => (
-          <Button
-            key={mode}
-            variant={selectedMode === mode ? 'default' : 'outline'}
-            onClick={() => setSelectedMode(mode as AIModelMode)}
-            className={`border-black ${
-              selectedMode === mode
-                ? 'bg-black text-white'
-                : 'text-black hover:bg-gray-100'
-            } mb-2`}
-          >
-            {mode === 'audio_speech'
-              ? 'TTS (Text To Speech)'
-              : mode.charAt(0).toUpperCase() +
-                mode.slice(1).replace('_', ' ')}
-          </Button>
-        ))}
-      </div>
-
-      {/* Responsive Table Container */}
-      <div className="overflow-x-auto">
-        <Table className="min-w-full table-fixed">
-          <TableHeader>
+    <div className="w-full">
+      <div className="overflow-x-auto rounded-lg border border-border">
+        <Table>
+          <TableHeader className="bg-muted/50">
             <TableRow>
-              <TableHead className="w-32">Model</TableHead>
-              <TableHead className="w-24">
-                <ProviderSelect
-                  models={aiModels[selectedMode] || []}
-                  selectedProviders={selectedProviders}
-                  setSelectedProviders={setSelectedProviders}
-                />
-              </TableHead>
-              <TableHead
-                onClick={() => requestSort('max_input_tokens')}
-                className="cursor-pointer w-20"
-              >
-                Input<br />Length{' '}
-                <ArrowUpDown className="inline-block ml-1 h-4 w-4" />
-              </TableHead>
-              <TableHead
-                onClick={() => requestSort('max_output_tokens')}
-                className="cursor-pointer w-20"
-              >
-                Output<br />Length{' '}
-                <ArrowUpDown className="inline-block ml-1 h-4 w-4" />
-              </TableHead>
-              {/* Reduced widths for Input Price, Output Price, and Supports Vision */}
-              <TableHead
-                onClick={() => requestSort('input_cost_per_token')}
-                className="cursor-pointer w-16 px-1"
-              >
-                Input Price<br />
-                (per 1M tokens){' '}
-                <ArrowUpDown className="inline-block ml-1 h-4 w-4" />
-              </TableHead>
-              <TableHead
-                onClick={() => requestSort('output_cost_per_token')}
-                className="cursor-pointer w-16 px-1"
-              >
-                Output Price<br />
-                (per 1M tokens){' '}
-                <ArrowUpDown className="inline-block ml-1 h-4 w-4" />
-              </TableHead>
-              <TableHead
-                onClick={() => requestSort('supports_vision')}
-                className="cursor-pointer w-12 px-1"
-              >
-                Supports<br />Vision{' '}
-                <ArrowUpDown className="inline-block ml-1 h-4 w-4" />
+              <TableHead className="w-[200px] min-w-[200px]">Provider</TableHead>
+              <TableHead>Model</TableHead>
+              <TableHead className="text-right">Input Cost</TableHead>
+              <TableHead className="text-right">Output Cost</TableHead>
+              <TableHead className="text-right">
+                <Button variant="ghost" onClick={() => requestSort('max_tokens')}>
+                  Max Tokens
+                  <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {sortedModels.map((model) => (
-              <TableRow key={model.name}>
-                <TableCell className="w-32 font-medium whitespace-normal break-words">
+            {sortedModels.map((model, index) => (
+              <TableRow key={index}>
+                <TableCell className="font-medium">
+                  <ProviderCell
+                    provider={getDisplayName(model.provider)}
+                    logo={model.logo}
+                  />
+                </TableCell>
+                <TableCell className="max-w-[200px] truncate">
                   {model.name}
                 </TableCell>
-                <TableCell className="w-24 overflow-hidden">
-                  <div className="flex items-center space-x-2 flex-wrap">
-                    <ProviderCell provider={model.provider} logo={model.logo} />
-                  </div>
+                <TableCell className="text-right">
+                  ${Number(model.sample_spec.input_cost_per_token).toFixed(8)}
                 </TableCell>
-                <TableCell className="w-20 text-center">
-                  {model.sample_spec.max_input_tokens ?? 'N/A'}
+                <TableCell className="text-right">
+                  ${Number(model.sample_spec.output_cost_per_token).toFixed(8)}
                 </TableCell>
-                <TableCell className="w-20 text-center">
-                  {model.sample_spec.max_output_tokens ?? 'N/A'}
-                </TableCell>
-                {/* Adjusted widths and padding for data cells */}
-                <TableCell className="w-16 px-1 text-center">
-                  {model.sample_spec.input_cost_per_token
-                    ? (
-                        Number(model.sample_spec.input_cost_per_token) *
-                        1e6
-                      ).toFixed(2)
-                    : 'N/A'}
-                </TableCell>
-                <TableCell className="w-16 px-1 text-center">
-                  {model.sample_spec.output_cost_per_token
-                    ? (
-                        Number(model.sample_spec.output_cost_per_token) *
-                        1e6
-                      ).toFixed(2)
-                    : 'N/A'}
-                </TableCell>
-                <TableCell className="w-12 px-1 text-center">
-                  {model.sample_spec.supports_vision ? '✅' : '❌'}
+                <TableCell className="text-right">
+                  {model.sample_spec.max_tokens?.toLocaleString() || 'N/A'}
                 </TableCell>
               </TableRow>
             ))}
