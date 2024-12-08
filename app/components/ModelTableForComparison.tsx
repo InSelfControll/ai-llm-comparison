@@ -125,12 +125,18 @@ const ModelTableForComparison: React.FC<ModelTableForComparisonProps> = ({
     {
       header: "Input Price (per 1M tokens) ↕",
       accessorKey: "sample_spec.input_cost_per_token",
-      cell: ({ row }) => `$${(row.original.sample_spec.input_cost_per_token * 1000000).toFixed(2)}`,
+      cell: ({ row }) => {
+        const pricePerMillion = Number(row.original.sample_spec.input_cost_per_token) * 1000000;
+        return `$${pricePerMillion.toFixed(2)}`;
+      }
     },
     {
       header: "Output Price (per 1M tokens) ↕",
       accessorKey: "sample_spec.output_cost_per_token",
-      cell: ({ row }) => `$${(row.original.sample_spec.output_cost_per_token * 1000000).toFixed(2)}`,
+      cell: ({ row }) => {
+        const pricePerMillion = Number(row.original.sample_spec.output_cost_per_token) * 1000000;
+        return `$${pricePerMillion.toFixed(2)}`;
+      }
     },
     {
       header: "Supports Vision ↕",
